@@ -1,6 +1,6 @@
-module github.com/TERITORI/teritori-chain
+module github.com/furysport/furya
 
-go 1.17
+go 1.18
 
 require (
 	github.com/CosmWasm/wasmd v0.28.0

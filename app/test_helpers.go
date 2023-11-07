@@ -1,4 +1,4 @@
-package teritori
+package furya
 
 import (
 	"encoding/json"
@@ -13,10 +13,10 @@ import (
 	dbm "github.com/tendermint/tm-db"
 )
 
-func setup(withGenesis bool, invCheckPeriod uint) (*TeritoriApp, GenesisState) {
+func setup(withGenesis bool, invCheckPeriod uint) (*FuryaApp, GenesisState) {
 	db := dbm.NewMemDB()
 	encCdc := MakeEncodingConfig()
-	app := NewTeritoriApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, invCheckPeriod, encCdc, simapp.EmptyAppOptions{})
+	app := NewFuryaApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, invCheckPeriod, encCdc, simapp.EmptyAppOptions{})
 	if withGenesis {
 		return app, NewDefaultGenesisState()
 	}
@@ -24,7 +24,7 @@ func setup(withGenesis bool, invCheckPeriod uint) (*TeritoriApp, GenesisState) {
 }
 
 // Setup initializes a new SimApp. A Nop logger is set in SimApp.
-func Setup(isCheckTx bool) *TeritoriApp {
+func Setup(isCheckTx bool) *FuryaApp {
 	app, genesisState := setup(!isCheckTx, 5)
 	if !isCheckTx {
 		// init chain must be called to stop deliverState from being nil
@@ -47,7 +47,7 @@ func Setup(isCheckTx bool) *TeritoriApp {
 }
 
 func SimAppConstructor(val network.Validator) servertypes.Application {
-	return NewTeritoriApp(
+	return NewFuryaApp(
 		val.Ctx.Logger, dbm.NewMemDB(), nil, true, make(map[int64]bool),
 		val.Ctx.Config.RootDir, 0, MakeEncodingConfig(), simapp.EmptyAppOptions{},
 		bam.SetPruning(storetypes.NewPruningOptionsFromString(val.AppConfig.Pruning)),

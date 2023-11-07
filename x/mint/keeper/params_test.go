@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/TERITORI/teritori-chain/x/mint/types"
+	"github.com/furysport/furya/x/mint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 )
@@ -11,7 +11,7 @@ func (suite *KeeperTestSuite) TestParamsGetSet() {
 
 	addr := sdk.AccAddress(ed25519.GenPrivKey().PubKey().Address().Bytes())
 	params = types.Params{
-		MintDenom:               "utori",
+		MintDenom:               "ufury",
 		GenesisBlockProvisions:  sdk.NewDec(1000),
 		ReductionPeriodInBlocks: 86400,
 		ReductionFactor:         sdk.NewDecWithPrec(5, 1),

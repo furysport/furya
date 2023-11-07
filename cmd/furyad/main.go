@@ -6,9 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	app "github.com/TERITORI/teritori-chain/app"
-	appparams "github.com/TERITORI/teritori-chain/app/params"
-	"github.com/TERITORI/teritori-chain/cmd/teritorid/cmd"
+	app "github.com/furysport/furya/app"
+	appparams "github.com/furysport/furya/app/params"
+	"github.com/furysport/furya/cmd/furyad/cmd"
 )
 
 func main() {

@@ -1,23 +1,23 @@
 syntax = "proto3";
-package teritori.mint.v1beta1;
+package furya.mint.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "teritori/mint/v1beta1/mint.proto";
+import "furya/mint/v1beta1/mint.proto";
 
-option go_package = "github.com/TERITORI/teritori-chain/x/mint/types";
+option go_package = "github.com/furysport/furya/x/mint/types";
 
 // Query provides defines the gRPC querier service.
 service Query {
   // Params returns the total set of minting parameters.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/teritori/mint/v1beta1/params";
+    option (google.api.http).get = "/furya/mint/v1beta1/params";
   }
 
   // BlockProvisions current minting epoch provisions value.
   rpc BlockProvisions(QueryBlockProvisionsRequest)
       returns (QueryBlockProvisionsResponse) {
-    option (google.api.http).get = "/teritori/mint/v1beta1/block_provisions";
+    option (google.api.http).get = "/furya/mint/v1beta1/block_provisions";
   }
 }
 

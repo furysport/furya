@@ -1,22 +1,22 @@
 syntax = "proto3";
-package teritori.airdrop.v1beta1;
+package furya.airdrop.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/v1beta1/coin.proto";
-import "teritori/airdrop/v1beta1/allocation.proto";
-import "teritori/airdrop/v1beta1/params.proto";
+import "furya/airdrop/v1beta1/allocation.proto";
+import "furya/airdrop/v1beta1/params.proto";
 
-option go_package = "github.com/TERITORI/teritori-chain/x/airdrop/types";
+option go_package = "github.com/furysport/furya/x/airdrop/types";
 
 // Query defines the gRPC querier service.
 service Query {
   rpc Allocation(QueryAllocationRequest) returns (QueryAllocationResponse) {
     option (google.api.http).get =
-        "/teritori/airdrop/v1beta1/allocation/{address}";
+        "/furya/airdrop/v1beta1/allocation/{address}";
   }
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/teritori/airdrop/v1beta1/params";
+    option (google.api.http).get = "/furya/airdrop/v1beta1/params";
   }
 }
 

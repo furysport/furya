@@ -31,14 +31,14 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	teritori "github.com/TERITORI/teritori-chain/app"
-	"github.com/TERITORI/teritori-chain/app/params"
+	furya "github.com/furysport/furya/app"
+	"github.com/furysport/furya/app/params"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the
 // main function.
 func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
-	encodingConfig := teritori.MakeEncodingConfig()
+	encodingConfig := furya.MakeEncodingConfig()
 	initClientCtx := client.Context{}.
 		WithCodec(encodingConfig.Marshaler).
 		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
@@ -46,11 +46,11 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 		WithLegacyAmino(encodingConfig.Amino).
 		WithInput(os.Stdin).
 		WithAccountRetriever(types.AccountRetriever{}).
-		WithHomeDir(teritori.DefaultNodeHome).
+		WithHomeDir(furya.DefaultNodeHome).
 		WithViper("")
 
 	rootCmd := &cobra.Command{
-		Use:   "teritorid",
+		Use:   "furyad",
 		Short: "Stargate Cosmos Hub App",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			initClientCtx, err := client.ReadPersistentCommandFlags(initClientCtx, cmd.Flags())
@@ -104,28 +104,28 @@ func initRootCmd(rootCmd *cobra.Command, encodingConfig params.EncodingConfig) {
 		encCfg: encodingConfig,
 	}
 	rootCmd.AddCommand(
-		genutilcli.InitCmd(teritori.ModuleBasics, teritori.DefaultNodeHome),
-		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, teritori.DefaultNodeHome),
-		genutilcli.GenTxCmd(teritori.ModuleBasics, encodingConfig.TxConfig, banktypes.GenesisBalancesIterator{}, teritori.DefaultNodeHome),
-		genutilcli.ValidateGenesisCmd(teritori.ModuleBasics),
-		PrepareGenesisCmd(teritori.DefaultNodeHome, teritori.ModuleBasics),
+		genutilcli.InitCmd(furya.ModuleBasics, furya.DefaultNodeHome),
+		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, furya.DefaultNodeHome),
+		genutilcli.GenTxCmd(furya.ModuleBasics, encodingConfig.TxConfig, banktypes.GenesisBalancesIterator{}, furya.DefaultNodeHome),
+		genutilcli.ValidateGenesisCmd(furya.ModuleBasics),
+		PrepareGenesisCmd(furya.DefaultNodeHome, furya.ModuleBasics),
 		ExportRichestSnapshotCmd(),
-		AddGenesisAccountCmd(teritori.DefaultNodeHome),
+		AddGenesisAccountCmd(furya.DefaultNodeHome),
 		tmcli.NewCompletionCmd(rootCmd, true),
-		testnetCmd(teritori.ModuleBasics, banktypes.GenesisBalancesIterator{}),
+		testnetCmd(furya.ModuleBasics, banktypes.GenesisBalancesIterator{}),
 		debug.Cmd(),
 		config.Cmd(),
 		pruning.PruningCmd(ac.newApp),
 	)
 
-	server.AddCommands(rootCmd, teritori.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
+	server.AddCommands(rootCmd, furya.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
 
 	// add keybase, auxiliary RPC, query, and tx child commands
 	rootCmd.AddCommand(
 		rpc.StatusCommand(),
 		queryCommand(),
 		txCommand(),
-		keys.Commands(teritori.DefaultNodeHome),
+		keys.Commands(furya.DefaultNodeHome),
 	)
 }
 
@@ -151,7 +151,7 @@ func queryCommand() *cobra.Command {
 		authcmd.QueryTxCmd(),
 	)
 
-	teritori.ModuleBasics.AddQueryCommands(cmd)
+	furya.ModuleBasics.AddQueryCommands(cmd)
 	cmd.PersistentFlags().String(flags.FlagChainID, "", "The network chain ID")
 
 	return cmd
@@ -178,7 +178,7 @@ func txCommand() *cobra.Command {
 		authcmd.GetDecodeCommand(),
 	)
 
-	teritori.ModuleBasics.AddTxCommands(cmd)
+	furya.ModuleBasics.AddTxCommands(cmd)
 	cmd.PersistentFlags().String(flags.FlagChainID, "", "The network chain ID")
 
 	return cmd
@@ -221,7 +221,7 @@ func (ac appCreator) newApp(
 		panic(err)
 	}
 
-	return teritori.NewTeritoriApp(
+	return furya.NewFuryaApp(
 		logger, db, traceStore, true, skipUpgradeHeights,
 		cast.ToString(appOpts.Get(flags.FlagHome)),
 		cast.ToUint(appOpts.Get(server.FlagInvCheckPeriod)),
@@ -261,7 +261,7 @@ func (ac appCreator) appExport(
 		loadLatest = true
 	}
 
-	teritoriApp := teritori.NewTeritoriApp(
+	furyaApp := furya.NewFuryaApp(
 		logger,
 		db,
 		traceStore,
@@ -274,10 +274,10 @@ func (ac appCreator) appExport(
 	)
 
 	if height != -1 {
-		if err := teritoriApp.LoadHeight(height); err != nil {
+		if err := furyaApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	}
 
-	return teritoriApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
+	return furyaApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
 }

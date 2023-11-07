@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/TERITORI/teritori-chain/x/airdrop/client/cli"
-	"github.com/TERITORI/teritori-chain/x/airdrop/keeper"
-	"github.com/TERITORI/teritori-chain/x/airdrop/types"
+	"github.com/furysport/furya/x/airdrop/client/cli"
+	"github.com/furysport/furya/x/airdrop/keeper"
+	"github.com/furysport/furya/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

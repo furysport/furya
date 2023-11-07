@@ -1,10 +1,10 @@
-package teritori
+package furya
 
 import (
 	"fmt"
 
-	airdropkeeper "github.com/TERITORI/teritori-chain/x/airdrop/keeper"
-	airdroptypes "github.com/TERITORI/teritori-chain/x/airdrop/types"
+	airdropkeeper "github.com/furysport/furya/x/airdrop/keeper"
+	airdroptypes "github.com/furysport/furya/x/airdrop/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	ante "github.com/cosmos/cosmos-sdk/x/auth/ante"

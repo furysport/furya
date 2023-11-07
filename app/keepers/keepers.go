@@ -1,8 +1,8 @@
 package keepers
 
 import (
-	airdropkeeper "github.com/TERITORI/teritori-chain/x/airdrop/keeper"
-	mintkeeper "github.com/TERITORI/teritori-chain/x/mint/keeper"
+	airdropkeeper "github.com/furysport/furya/x/airdrop/keeper"
+	mintkeeper "github.com/furysport/furya/x/mint/keeper"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
@@ -21,7 +21,7 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v3/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
 
-	intertxkeeper "github.com/TERITORI/teritori-chain/x/intertx/keeper"
+	intertxkeeper "github.com/furysport/furya/x/intertx/keeper"
 
 	routerkeeper "github.com/strangelove-ventures/packet-forward-middleware/v2/router/keeper"
 

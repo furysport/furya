@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/TERITORI/teritori-chain/x/intertx/types"
+	"github.com/furysport/furya/x/intertx/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"

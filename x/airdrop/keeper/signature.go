@@ -4,8 +4,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 
-	appparams "github.com/TERITORI/teritori-chain/app/params"
-	"github.com/TERITORI/teritori-chain/x/airdrop/types"
+	appparams "github.com/furysport/furya/app/params"
+	"github.com/furysport/furya/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/bech32"

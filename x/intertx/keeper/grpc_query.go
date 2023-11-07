@@ -9,7 +9,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	icatypes "github.com/cosmos/ibc-go/v3/modules/apps/27-interchain-accounts/types"
 
-	"github.com/TERITORI/teritori-chain/x/intertx/types"
+	"github.com/furysport/furya/x/intertx/types"
 )
 
 // InterchainAccount implements the Query/InterchainAccount gRPC method

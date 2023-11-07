@@ -1,4 +1,4 @@
-package teritori_test
+package furya_test
 
 import (
 	"encoding/json"
@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	teritori "github.com/TERITORI/teritori-chain/app"
+	furya "github.com/furysport/furya/app"
 
-	"github.com/TERITORI/teritori-chain/app/helpers"
+	"github.com/furysport/furya/app/helpers"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	"github.com/tendermint/tendermint/libs/rand"
@@ -26,7 +26,7 @@ func init() {
 }
 
 // Profile with:
-// /usr/local/go/bin/go test -benchmem -run=^$ github.com/cosmos/cosmos-sdk/TeritoriApp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
+// /usr/local/go/bin/go test -benchmem -run=^$ github.com/cosmos/cosmos-sdk/FuryaApp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
 func BenchmarkFullAppSimulation(b *testing.B) {
 	config, db, dir, logger, _, err := simapp.SetupSimulation("goleveldb-app-sim", "Simulation")
 	if err != nil {
@@ -41,7 +41,7 @@ func BenchmarkFullAppSimulation(b *testing.B) {
 		}
 	}()
 
-	app := teritori.NewTeritoriApp(logger, db, nil, true, map[int64]bool{}, teritori.DefaultNodeHome, simapp.FlagPeriodValue, teritori.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
+	app := furya.NewFuryaApp(logger, db, nil, true, map[int64]bool{}, furya.DefaultNodeHome, simapp.FlagPeriodValue, furya.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
 
 	// Run randomized simulation:w
 	_, simParams, simErr := simulation.SimulateFromSeed(
@@ -106,7 +106,7 @@ func TestAppStateDeterminism(t *testing.T) {
 			}
 
 			db := dbm.NewMemDB()
-			app := teritori.NewTeritoriApp(logger, db, nil, true, map[int64]bool{}, teritori.DefaultNodeHome, simapp.FlagPeriodValue, teritori.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
+			app := furya.NewFuryaApp(logger, db, nil, true, map[int64]bool{}, furya.DefaultNodeHome, simapp.FlagPeriodValue, furya.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
 
 			fmt.Printf(
 				"running non-determinism simulation; seed %d: %d/%d, attempt: %d/%d\n",
